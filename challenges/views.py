@@ -1,6 +1,9 @@
 from django.http import HttpResponse, HttpResponseNotFound
 
+
 # Create your views here.
+def monthly_challenge_by_number(reques, month):
+    return HttpResponse(month)
 
 
 def monthly_challenge(request, month):
