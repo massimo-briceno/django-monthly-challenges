@@ -41,18 +41,17 @@ def index(request):
 <head>
     <title>Challenges</title>
         <ul>
-            <li> January</li>
-            <li> February</li>
-            <li> March</li>
-            <li> April</li>
-            <li> May</li>
-            <li> June</li>
-            <li> July</li>
-            <li> August</li>
-            <li> September</li>
-            <li> October</li>
-            <li> November</li>
-            <li> December</li>
+            <li> <a href="">January</li>
+            <li> <a href="">February</li>
+            <li> <a href="">March</li>
+            <li> <a href="">April</li>
+            <li> <a href="">May</li>
+            <li> <a href="">June</li>
+            <li> <a href="">July</li>
+            <li> <a href="">August</li>
+            <li> <a href="">September</li>
+            <li> <a href="">October</li>
+            <li> <a href="">November</li>
         </ul>
 </head>
 </html>
