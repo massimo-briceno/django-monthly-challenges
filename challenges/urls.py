@@ -11,4 +11,8 @@ urlpatterns = [
         views.monthly_challenge,
         name="monthly-challege-url",
     ),
+    path(
+        "",
+        views.index,
+    ),
 ]

@@ -31,5 +31,30 @@ def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
         return HttpResponse(challenge_text)
-    except:
+    except Exception:
         return HttpResponseNotFound("This month is not supported!")
+
+
+def index(request):
+    index = """
+<html>
+<head>
+    <title>Challenges</title>
+        <ul>
+            <li> January</li>
+            <li> February</li>
+            <li> March</li>
+            <li> April</li>
+            <li> May</li>
+            <li> June</li>
+            <li> July</li>
+            <li> August</li>
+            <li> September</li>
+            <li> October</li>
+            <li> November</li>
+            <li> December</li>
+        </ul>
+</head>
+</html>
+"""
+    return HttpResponse(index)
