@@ -36,24 +36,29 @@ def monthly_challenge(request, month):
 
 
 def index(request):
-    index = """
-<html>
-<head>
-    <title>Challenges</title>
-        <ul>
-            <li> <a href="/challenges/january">January</li>
-            <li> <a href="/challenges/february">February</li>
-            <li> <a href="/challenges/march">March</li>
-            <li> <a href="/challenges/april">April</li>
-            <li> <a href="/challenges/may">May</li>
-            <li> <a href="/challenges/june">June</li>
-            <li> <a href="/challenges/july">July</li>
-            <li> <a href="/challenges/august">August</li>
-            <li> <a href="/challenges/september">September</li>
-            <li> <a href="/challenges/october">October</li>
-            <li> <a href="/challenges/november">November</li>
-        </ul>
-</head>
-</html>
-"""
+    beginHTML = """
+        <html>
+        <head>
+            <title>Challenges</title>
+        </head>
+        <body>
+            <p>
+                <ul>
+        """
+    endHTML = """
+                </ul>
+            </p>
+        </body>
+        </html>
+        """
+    list_items = ""
+    months = list(monthly_challenges.keys())
+
+    for month in months:
+        capitalized_month = month.capitalize()
+        month_path = reverse("monthly-challenge-path", args=[month])
+        list_items += f'<li> <a href="{month_path}" > {capitalized_month} </li>'
+
+    index = beginHTML + list_items + endHTML
+
     return HttpResponse(index)
