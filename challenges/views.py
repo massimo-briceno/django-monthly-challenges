@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -44,29 +44,11 @@ def monthly_challenge(request, month):
 
 
 def index(request):
-    beginHTML = """
-        <html>
-        <head>
-            <title>Challenges</title>
-        </head>
-        <body>
-            <p>
-                <ul>
-        """
-    endHTML = """
-                </ul>
-            </p>
-        </body>
-        </html>
-        """
-    list_items = ""
     months = list(monthly_challenges.keys())
-
-    for month in months:
-        capitalized_month = month.capitalize()
-        month_path = reverse("monthly-challenge-path", args=[month])
-        list_items += f'<li> <a href="{month_path}" > {capitalized_month} </li>'
-
-    index = beginHTML + list_items + endHTML
-
-    return HttpResponse(index)
+    return render(
+        request,
+        "challenges/index.html",
+        {
+            "months": months,
+        },
+    )
