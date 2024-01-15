@@ -9,7 +9,7 @@ urlpatterns = [
     path(
         "<str:month>",
         views.monthly_challenge,
-        name="month-challenge",
+        name="monthly-challenge-url",
     ),
     path(
         "",
