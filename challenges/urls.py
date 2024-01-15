@@ -5,6 +5,7 @@ urlpatterns = [
     path(
         "<int:month>",
         views.monthly_challenge_by_number,
+        
     ),
     path(
         "<str:month>",
@@ -14,5 +15,6 @@ urlpatterns = [
     path(
         "",
         views.index,
+        name="index-url"
     ),
 ]
