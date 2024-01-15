@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Challenges</title>
-  </head>
-  <body>
+{% extends "base.html"%}
+
+{% block page_title %}
+All Challenges
+{% endblock  %} 
+
+{% block body_content %}
     <ul>
       {% for month in months %}
       <li>
-        <a href="{% url "month-challenge" month %}">{{ month | title}}</a>
+        <a href="{% url "monthly-challenge-url" month %}">{{ month | title}}</a>
       </li>
       {% endfor %}
-    </ul>
-  </body>
-</html>
+ {% endblock  %} 
