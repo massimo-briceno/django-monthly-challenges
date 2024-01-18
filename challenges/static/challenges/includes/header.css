@@ -14,5 +14,11 @@ header nav {
 
 header nav a {
   color: aliceblue;
+  font-size: 2rem;
   font-weight: bold;
+  text-decoration: none;
+}
+header nav a:hover,
+header nav a:active {
+  color: #9b0f0f;
 }
