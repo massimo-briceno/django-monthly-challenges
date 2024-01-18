@@ -1,5 +1,7 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 monthly_challenges = {
     "january": "Eat no meat for the entire month!",
@@ -13,7 +15,7 @@ monthly_challenges = {
     "september": "Learn Django for at least 20 minutes every day!",
     "october": "Eat no meat for the entire month!",
     "november": "Walk for at least 20 minutes every day!",
-    "december": "Learn Django for at least 20 minutes every day!",
+    "december": None,
 }
 
 
@@ -21,44 +23,35 @@ monthly_challenges = {
 def monthly_challenge_by_number(reques, month):
     months = list(monthly_challenges.keys())
     if month > len(months) or month == 0:
-        return HttpResponseNotFound("Invalid month!")
+        responsa_data = render_to_string("404.html")
+        return HttpResponseNotFound(responsa_data)
     redirect_month = months[month - 1]
-    redirect_path = reverse("monthly-challege-url", args=[redirect_month])
+    redirect_path = reverse("monthly-challenge-url", args=[redirect_month])
     return HttpResponseRedirect(redirect_path)
 
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return HttpResponse(challenge_text)
+        return render(
+            request,
+            "challenges/challenge.html",
+            {
+                "month": month,
+                "text": challenge_text,
+            },
+        )
     except Exception:
-        return HttpResponseNotFound("This month is not supported!")
+        responsa_data = render_to_string("404.html")
+        return HttpResponseNotFound(responsa_data)
 
 
 def index(request):
-    beginHTML = """
-        <html>
-        <head>
-            <title>Challenges</title>
-        </head>
-        <body>
-            <p>
-                <ul>
-        """
-    endHTML = """
-                </ul>
-            </p>
-        </body>
-        </html>
-        """
-    list_items = ""
     months = list(monthly_challenges.keys())
-
-    for month in months:
-        capitalized_month = month.capitalize()
-        month_path = reverse("monthly-challenge-path", args=[month])
-        list_items += f'<li> <a href="{month_path}" > {capitalized_month} </li>'
-
-    index = beginHTML + list_items + endHTML
-
-    return HttpResponse(index)
+    return render(
+        request,
+        "challenges/index.html",
+        {
+            "months": months,
+        },
+    )
